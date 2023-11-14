@@ -1,5 +1,16 @@
 function tocaSom(idElementoAudio) {
-    document.querySelector(idElementoAudio).play();
+    const elemento = document.querySelector(idElementoAudio);
+    
+    if (elemento) {
+        console.log(elemento);
+        if (elemento.tagName === "AUDIO") {
+            elemento.play();
+        } else {
+            console.error("Elemento não interativo");
+        }
+    } else {
+        console.error("Elemento não consta no DOM");
+    }
 }
 
 // atribui uma função ao evento onclick do elemento
@@ -16,8 +27,12 @@ for (let contador = 0; contador < listaDeTeclas.length; contador++) {
 		tocaSom(idAudio);
     }
     
-    tecla.onkeydown = function () {
-        tecla.classList.add("ativa");
+    tecla.onkeydown = function (evento) {
+        console.log(evento);
+        // "==" compara valores "===" compara objetos
+        if (evento.code === "Space" || evento.code === "Enter") {
+            tecla.classList.add("ativa");
+        }
     }
 
     tecla.onkeyup = function () {
